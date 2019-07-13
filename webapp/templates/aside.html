@@ -1,0 +1,51 @@
+<nav class="nav col-md-2 flex-column bg-light">
+    <a class="nav-link" href="#">Для появления таблицы</a>
+    <p>Сделать выборку по категориям</p>
+    <a class="nav-link" href="#">СМИ</a>
+    <a class="nav-link" href="#">Спорт</a>
+    <a class="nav-link" href="#">Музыка</a>
+    <a class="nav-link" href="#">Развлечения</a>
+    <p>Чекбоксы</p>
+    <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input"  id="sort_description" name="example1" checked>
+            <label class="custom-control-label" for="sort_description">Описание</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input"  id="sort_yandex_sqi" name="example1" checked>
+        <label class="custom-control-label" for="sort_yandex_sqi">ИКС</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="sort_domain" name="example2" checked>
+        <label class="custom-control-label" for="sort_domain">Домен NS-серверов</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="sort_domain_registration_date" name="example3" checked>
+        <label class="custom-control-label" for="sort_domain_registration_date">Домен зарегистрирован</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="sort_domain_valid_date" name="example4" checked>
+        <label class="custom-control-label" for="sort_domain_valid_date">Домен действителен</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="sort_published_date" name="example5" checked>
+            <label class="custom-control-label" for="sort_published_date">По дате добавления</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="sort_update_date" name="example5" checked>
+            <label class="custom-control-label" for="sort_update_date">По дате Обновления</label>
+    </div>
+</nav>
+
+<!-- Скрипт для переключения колонок в таблице -->
+<script>
+    $(function(){
+    $('#sort_description,#sort_yandex_sqi,#sort_domain,#sort_domain_registration_date,#sort_domain_valid_date,#sort_published_date,#sort_update_date').click(function(){
+        var idname = this.id;          
+    if(this.checked == false) {
+        $('.' + idname).addClass('d-none');
+    } else {
+        $('.' + idname).removeClass('d-none');   
+    }
+    });
+    });
+    </script>
