@@ -1,5 +1,7 @@
-from flask_pymongo import PyMongo
+from pymongo import MongoClient
 
-mongo = PyMongo()
-
-#print(mongo.db.site_data)
+client = MongoClient("mongodb://localhost:27017/")
+db = client["brdomain"]
+site_url = db["site_url"]
+site_data = db["site_data"]
+users = db["users"]
