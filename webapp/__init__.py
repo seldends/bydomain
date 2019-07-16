@@ -26,3 +26,25 @@ def home_page():
     #mongo.db.site_data.insert(mydict)
     #site_list = mongo.db.site_data.find({"_id": "i7.ru"})
     return render_template("index.html", page_title=title, login_form=login_form, signup_form=signup_form, site_list=site_list)
+
+
+from flask import Flask 
+from flask_login import LoginManager
+
+from .extensions import mongo
+from .main import main
+from webapp.user.views import blueprint as user_blueprint
+
+def create_app(config_object='webapp.settings'):
+    
+    app = Flask(__name__)
+    app.config.from_object(config_object)
+    mongo.init_app(app)
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'Login'
+
+    app.register_blueprint(main)
+    app.register_blueprint(user_blueprint)
+
+    return app
