@@ -8,7 +8,13 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    user_collection = mongo.db.users
-    user_collection.insert({'name' : 'Cristina'})
-    user_collection.insert({'name' : 'Derek'})
-    return '<h1>Added a User!</h1>'
+    title = 'Главная страница'    
+    login_form = LoginForm()
+    signup_form = RegistrationForm()
+
+    #user_collection = mongo.db.users
+    #user_collection.insert({'name' : 'Cristina'})
+    #user_collection.insert({'name' : 'Derek'})
+    return render_template("index.html", page_title=title, login_form=login_form, signup_form=signup_form)
+
+    

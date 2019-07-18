@@ -19,11 +19,11 @@ class RegistrationForm(FlaskForm):
 
     # def validate_username(self, username):
     #     users_count = users.find_one({ "username": username })
-    #     if users_count:
+    #     if users_count is not None:
     #         raise ValidationError('Пользователь с таким именем уже зарегистрирован')
 
     # def validate_email(self, email):
     #     users_count = users.find_one({ "email": email })
-    #     if users_count:
+    #     if users_count is not None:
     #         raise ValidationError('Пользователь с такой почтой уже зарегистрирован')
 
