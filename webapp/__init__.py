@@ -1,7 +1,5 @@
 from flask import Flask 
-from flask_login import LoginManager
-
-from .extensions import mongo
+from .extensions import mongo, login_manager
 from webapp.database import users
 
 from .main import main as main_blueprint
@@ -17,8 +15,6 @@ def create_app(config_object='webapp.settings'):
     app.register_blueprint(main_blueprint)
     app.register_blueprint(user_blueprint)
 
-
-    login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'login'
     @login_manager.user_loader

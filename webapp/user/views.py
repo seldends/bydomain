@@ -1,20 +1,23 @@
 from flask import Blueprint, redirect, url_for, render_template, flash, request
-from webapp.user.forms import LoginForm, RegistrationForm
-from webapp.user.models import User
+
 from flask_login import current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from webapp.database import users, site_data
+
+from webapp.user.forms import LoginForm, RegistrationForm
+from webapp.user.models import User
+from webapp.extensions import mongo
 
 blueprint = Blueprint('user', __name__, url_prefix='/users')
 
 @blueprint.route('/signup', methods=['GET','POST'])
 def signup():
+    user_collection = mongo.db.users
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     signup_form = RegistrationForm()
     if signup_form.validate_on_submit():
-        existing_username = users.find_one({ "username" : signup_form.username.data })
-        existing_email = users.find_one({ "email" : signup_form.email.data })
+        existing_username = user_collection.find_one({ "username" : signup_form.username.data })
+        existing_email = user_collection.find_one({ "email" : signup_form.email.data })
         if existing_username is not None:
             flash('Пользователь с таким именем уже зарегистрирован')
             return redirect(url_for('main.index'))
@@ -23,7 +26,7 @@ def signup():
             return redirect(url_for('main.index'))
         password = set_password(signup_form.password.data)
         mydict = {"username": signup_form.username.data, "email": signup_form.email.data, "password": password, "role": "user"}
-        users.insert(mydict)
+        user_collection.insert(mydict)
         flash('Вы успешно зарегистрировались')
         return redirect(url_for('main.index'))
     else:
@@ -33,14 +36,15 @@ def signup():
         return redirect(url_for('main.index'))
 
 
-@blueprint.route('/login', methods=['POST'])
+@blueprint.route('/login', methods=['GET','POST'])
 def login():
+    user_collection = mongo.db.users
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     login_form = LoginForm()
     if login_form.validate_on_submit():
         password = login_form.password.data  
-        user = users.find_one({ "username" : login_form.username.data })
+        user = user_collection.find_one({ "username" : login_form.username.data })
         if user is None:
             flash('Пользователь не найден')
             return redirect(url_for('main.index'))
