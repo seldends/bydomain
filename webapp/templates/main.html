@@ -1,7 +1,51 @@
-
-<p>              
-    Заголовок: {{ site_list["domain"] }}<br>
-    Название: {{ site_list["domain_type"] }}<br>
-    Домен NS-серверов: {{ site_list["registrar"] }}<br>
-    Домен зарегистрирован: {{ site_list["creation_date"] }}  действителен до: {{ site_list["expiration_date"] }}<br>     
-</p>
+<div class="col-md-10">
+     
+        <table class="table table-striped table-condensed" style="border-collapse:collapse;" >
+            <thead>
+                <tr>
+                    <th class="sort_url">Сайт</th>
+                    <th class="sort_description">Описание</th>
+                    <th class="sort_domain">Домен NS-серверов</th>
+                    <th class="sort_domain_registration_date">Домен зарегистрирован</th>
+                    <th class="sort_domain_valid_date">Домен действителен</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for site in site_list %}
+                
+                <tr data-toggle="collapse" data-target="#demo{{ site._id }}" class="accordion-toggle">
+                    <td class="sort_url">{{ site["domain"] }}</td>
+                    <td class="sort_description">{{ site["domain_type"] }}</td>
+                    <td class="sort_domain">{{ site["registrar"] }}</td>
+                    <td class="sort_domain_registration_date">{{ site["creation_date"] }}</td>
+                    <td class="sort_domain_valid_date">{{ site["expiration_date"] }}</td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="hiddenRow">
+                        <div id="#demo{{ site._id }}" class="accordian-body collapse">
+                            <p>              
+                                Заголовок: {{ site["domain"] }}<br>
+                                Название: {{ site["domain_type"] }}<br>
+                                Домен NS-серверов: {{ site["registrar"] }}<br>
+                                Домен зарегистрирован: {{ site["creation_date"] }}  действителен до: {{ site["expiration_date"] }}<br>     
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                
+                {% endfor %}         
+            </tbody>     
+        </table>
+    
+    </div>
+    <div class="container"> 
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>

@@ -36,7 +36,7 @@ def signup():
         return redirect(url_for('main.index'))
 
 
-@blueprint.route('/login', methods=['GET','POST'])
+@blueprint.route('/login', methods=['POST'])
 def login():
     user_collection = mongo.db.users
     if current_user.is_authenticated:
@@ -56,15 +56,16 @@ def login():
             login_user(user_obj)
             flash('Вы вошли на сайт')
             return redirect(url_for('main.index')) 
+        return redirect(url_for('main.index'))
     else:     
-        flash('Неправильное имя пользователя или пароль')
+        flash('Ошибка')
         return redirect(url_for('main.index'))
 
 
 @blueprint.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 def set_password(password):
     return generate_password_hash(password)

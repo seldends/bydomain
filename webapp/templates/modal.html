@@ -12,7 +12,8 @@
         <div class="modal-body">
           <!-- Форма входа -->
           <div id="flogin">
-            <form class="form-signin" method="POST" action="{{ url_for('user.login') }}">          
+            <form class="form-signin" method="POST" action="{{ url_for('user.login') }}">      
+                {{ login_form.hidden_tag() }}    
               <div class='form-label-group'>
                 {{ login_form.username() }}
                 {{ login_form.username.label }}
@@ -22,16 +23,16 @@
                 {{ login_form.password.label }}
               </div>         
                 {{ login_form.submit }} 
-                <div class="container"> 
-                  {% with messages = get_flashed_messages() %}
-                  {% if messages %}
-                      {% for message in messages %}
-                      <div class="alert alert-danger" role="alert">
-                          {{ message }}
-                      </div>
-                      {% endfor %}
-                  {% endif %}
-                  {% endwith %}
+              <div class="container"> 
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
               </div> 
             </form>
           </div>

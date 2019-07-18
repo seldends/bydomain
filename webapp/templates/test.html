@@ -2,65 +2,12 @@
 
 {% block content %}
   <main class="main">
-    <div class="modal-body">
-        <!-- Форма входа -->
-        <div id="flogin">
-          <form class="form-signin" method="POST" action="{{ url_for('user.login') }}">          
-            <div class='form-label-group'>
-              {{ login_form.username() }}
-              {{ login_form.username.label }}
-            </div>
-            <div class='form-label-group'>
-              {{ login_form.password() }}
-              {{ login_form.password.label }}
-            </div>         
-              {{ login_form.submit }} 
-              <div class="container"> 
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-                {% endif %}
-                {% endwith %}
-            </div> 
-          </form>
-        </div>
-        <!-- Форма регистрации -->
-        <div id="fsignup" class="d-none">
-          <form class="form-signin"  method="POST" action="{{ url_for('user.signup') }}">
-            {{ signup_form.hidden_tag() }}
-            <div class='form-label-group'>
-              {{ signup_form.username() }}
-              {{ signup_form.username.label }}
-            </div>
-            <div class='form-label-group'>     
-              {{ signup_form.email() }}
-              {{ signup_form.email.label }}
-            </div>
-            <div class='form-label-group'>
-              {{ signup_form.password() }}
-              {{ signup_form.password.label }}
-            </div>
-            <div class='form-label-group'>
-              {{ signup_form.password2() }}
-              {{ signup_form.password2.label }}
-            </div>
-            {{ signup_form.submit }}
-            <div class="container"> 
-              {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                  {% for message in messages %}
-                  <div class="alert alert-danger" role="alert">
-                      {{ message }}
-                  </div>
-                  {% endfor %}
-              {% endif %}
-              {% endwith %}
-          </div>
-          </form>
-        </div>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Навбар боковой -->
+        {% include 'aside.html' %}   
+        {% include 'main.html' %}  
+      </div>
+    </div>
   </main>
 {% endblock %}

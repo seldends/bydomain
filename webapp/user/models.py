@@ -1,5 +1,5 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from webapp.database import users
+#from webapp.database import users
 
 class User:
     def __init__(self, username):

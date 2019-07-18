@@ -1,5 +1,5 @@
 <nav class="nav col-md-2 flex-column bg-light">
-    <a class="nav-link" href="#">Для появления таблицы</a>
+    <a class="nav-link" href="{{ url_for('site.sort_test') }}">Для появления таблицы</a>
     <p>Сделать выборку по категориям</p>
     <a class="nav-link" href="#">СМИ</a>
     <a class="nav-link" href="#">Спорт</a>
@@ -7,8 +7,8 @@
     <a class="nav-link" href="#">Развлечения</a>
     <p>Чекбоксы</p>
     <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input"  id="sort_description" name="example1" checked>
-            <label class="custom-control-label" for="sort_description">Описание</label>
+        <input type="checkbox" class="custom-control-input"  id="sort_description" name="example1" checked>
+        <label class="custom-control-label" for="sort_description">Описание</label>
     </div>
     <div class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input"  id="sort_yandex_sqi" name="example1" checked>
