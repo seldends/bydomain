@@ -2,7 +2,7 @@ from flask import Flask
 from .extensions import mongo, login_manager
 #from webapp.database import users
 
-from .main import main as main_blueprint
+from webapp.main import blueprint as main_blueprint
 from webapp.user.views import blueprint as user_blueprint
 from webapp.site.views import blueprint as site_blueprint
 from webapp.site.util import blueprint as util_blueprint
@@ -28,7 +28,7 @@ def create_app(config_object='webapp.settings'):
         u = user_collection.find_one({"username": username})
         if not u:
             return None
-        return User(username=u["username"])
+        return User(username=u["username"], hash_password=u['password'])
 
     return app
 

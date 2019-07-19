@@ -16,6 +16,12 @@ class RegistrationForm(FlaskForm):
     password2 = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password')], render_kw={"class": "form-control", "placeholder": "Повторите пароль"})
     submit = SubmitField('Отправить', render_kw={"class": "btn btn-primary"})
 
+class ChangePasswordForm(FlaskForm):
+    password_old = PasswordField('Пароль', validators=[DataRequired()], render_kw={"class": "form-control", "placeholder": "Пароль"})
+    password_new1 = PasswordField('Новый пароль', validators=[DataRequired()], render_kw={"class": "form-control", "placeholder": "Новый пароль"})
+    password_new2 = PasswordField('Повторите пароль', validators=[DataRequired()], render_kw={"class": "form-control", "placeholder": "Повторите пароль"})
+    submit = SubmitField('Обновить', render_kw={"class": "btn btn-primary"})
+
     # def validate_username(self, username):
     #     users_count = users.find_one({ "username": username })
     #     if users_count is not None:

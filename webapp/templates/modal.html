@@ -23,17 +23,6 @@
                 {{ login_form.password.label }}
               </div>         
                 {{ login_form.submit }} 
-              <div class="container"> 
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-                {% endif %}
-                {% endwith %}
-              </div> 
             </form>
           </div>
           <!-- Форма регистрации -->
@@ -57,17 +46,6 @@
                 {{ signup_form.password2.label }}
               </div>
               {{ signup_form.submit }}
-              <div class="container"> 
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-                {% endif %}
-                {% endwith %}
-            </div>
             </form>
           </div>
         </div>      
