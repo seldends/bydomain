@@ -1,3 +1,4 @@
+from flask import Blueprint
 import urllib.request
 import requests, json
 from re import findall
@@ -5,9 +6,14 @@ from pymongo import MongoClient
 from bs4 import BeautifulSoup
 from webapp.extensions import mongo
 
+#from flask_pymongo import PyMongo 
 
-site_url_collection = mongo.db.site_url
-site_collection = mongo.db.site_data
+#mongo = PyMongo()
+blueprint = Blueprint('util', __name__)
+
+#site_url_collection = mongo.db.site_url
+#site_collection = mongo.db.site_data
+#site_favorites = mongo.db.favorites
 
 def get_html(url):
     headers = {
@@ -25,6 +31,7 @@ def get_html(url):
 def save_url(url):
     url_str = str(url)
     mydict = {"url": url_str}
+    site_url_collection = mongo.db.site_url
     site_url_collection.insert_one(mydict)
 
 
@@ -40,12 +47,15 @@ def get_url():
 
 
 def save_data(domain, domain_type, registrar, creation_date, expiration_date):
+    site_collection = mongo.db.site_data
     mydict = {"domain": domain, "domain_type": domain_type, "registrar": registrar, "creation_date": creation_date, "expiration_date": expiration_date}
     site_collection.insert_one(mydict)
 
 
-def get_data():
-    with urllib.request.urlopen("http://api.whois.vu/?q=i7.ru") as url:
+def get_data(name):
+    url_str = "http://api.whois.vu/?q=" + name 
+
+    with urllib.request.urlopen(url_str) as url:
         data = json.loads(url.read().decode())
     text = data["whois"]
     dates = get_dates(text)
@@ -69,3 +79,10 @@ def get_dates(text):
     expiration_date = findall(date_pattern, findall(ed_pattern, text)[0])
     return {"creation_date": creation_date[0], "expiration_date": expiration_date[0]}
 
+# def fav_col(domain, domain_type, registrar, creation_date, expiration_date):
+#     mydict = {"domain": domain, "domain_type": domain_type, "registrar": registrar, "creation_date": creation_date, "expiration_date": expiration_date}
+#     site_collection.insert_one(mydict)
+
+
+#def add_site(url):
+#get_data()

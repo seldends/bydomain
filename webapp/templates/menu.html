@@ -2,7 +2,14 @@
     <!-- Название -->
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Название</a>
     <!-- Строка поиска -->
-    <form class="form-inline" method="GET">
+    <form class="form-inline" method="POST" action="{{ url_for('site.search') }}">
+        {{ signup_form.hidden_tag() }}
+        <div>
+          {{ search_form.request() }}
+          {{ search_form.submit }}
+        </div>
+        
+        
     </form>
   
   
@@ -24,3 +31,4 @@
       {% endif %}
     </ul>
   </nav>
+

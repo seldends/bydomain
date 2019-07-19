@@ -5,6 +5,7 @@ from .extensions import mongo, login_manager
 from .main import main as main_blueprint
 from webapp.user.views import blueprint as user_blueprint
 from webapp.site.views import blueprint as site_blueprint
+from webapp.site.util import blueprint as util_blueprint
 from webapp.user.models import User
 
 def create_app(config_object='webapp.settings'):
@@ -16,6 +17,7 @@ def create_app(config_object='webapp.settings'):
     app.register_blueprint(main_blueprint)
     app.register_blueprint(user_blueprint)
     app.register_blueprint(site_blueprint)
+    app.register_blueprint(util_blueprint)
 
     login_manager.init_app(app)
     login_manager.login_view = 'login'

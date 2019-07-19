@@ -8,32 +8,38 @@
                     <th class="sort_domain">Домен NS-серверов</th>
                     <th class="sort_domain_registration_date">Домен зарегистрирован</th>
                     <th class="sort_domain_valid_date">Домен действителен</th>
+                    {% if current_user.is_authenticated %}
+                    <th class="favorites"></th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
+
                 {% for site in site_list %}
                 
-                <tr data-toggle="collapse" data-target="#demo{{ site._id }}" class="accordion-toggle">
-                    <td class="sort_url">{{ site["domain"] }}</td>
-                    <td class="sort_description">{{ site["domain_type"] }}</td>
-                    <td class="sort_domain">{{ site["registrar"] }}</td>
-                    <td class="sort_domain_registration_date">{{ site["creation_date"] }}</td>
-                    <td class="sort_domain_valid_date">{{ site["expiration_date"] }}</td>
+                <tr data-toggle="collapse" data-target="#id{{site._id}}" class="accordion-toggle">
+                    <td class="sort_url">{{ site.domain }}</td>
+                    <td class="sort_description">{{ site.domain_type }}</td>
+                    <td class="sort_domain">{{ site.registrar }}</td>
+                    <td class="sort_domain_registration_date">{{ site.creation_date }}</td>
+                    <td class="sort_domain_valid_date">{{ site.expiration_date }}</td>
+                    {% if current_user.is_authenticated %}
+                    <td class="favorites"></td>
+                    {% endif %}
                 </tr>
                 <tr>
                     <td colspan="6" class="hiddenRow">
-                        <div id="#demo{{ site._id }}" class="accordian-body collapse">
+                        <div id="id{{site._id}}" class="accordian-body collapse">
                             <p>              
-                                Заголовок: {{ site["domain"] }}<br>
-                                Название: {{ site["domain_type"] }}<br>
-                                Домен NS-серверов: {{ site["registrar"] }}<br>
-                                Домен зарегистрирован: {{ site["creation_date"] }}  действителен до: {{ site["expiration_date"] }}<br>     
+                                Заголовок: {{ site.domain }}<br>
+                                Название: {{ site.domain_type }}<br>
+                                Домен NS-серверов: {{ site.registrar }}<br>
+                                Домен зарегистрирован: {{ site.creation_date }}  действителен до: {{ site.expiration_date }}<br>     
                             </p>
                         </div>
                     </td>
-                </tr>
-                
-                {% endfor %}         
+                </tr>              
+                {% endfor %} 
             </tbody>     
         </table>
     

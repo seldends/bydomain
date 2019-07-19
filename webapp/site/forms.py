@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired, EqualTo, ValidationError
 
 
 class SearchForm(FlaskForm):
-    request = StringField('Название сайта *2', validators=[DataRequired()], render_kw={"class": "form-control form-control-dark", "placeholder": "Название сайта *1"})
+    request = StringField('host:by', validators=[DataRequired()], render_kw={"class": "form-control form-control-dark", "placeholder": "host:by"})
     submit = SubmitField('Найти', render_kw={"class": "btn btn-primary"})

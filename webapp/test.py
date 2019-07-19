@@ -30,16 +30,17 @@ def validate_username(username):
 # print(users_count)
 # print(site_list)
 
-password2 = "150000$TJeCQvvV$15c04a338635b4d11f559b9d8d55f92bb91e17f82ec34283809b25b082ecb550"
-myquery = { "username" : "aaaa" }  
-user = users.find_one(myquery)
-print(user['password'])
-
-
-check_password(user['password'], password2)
-
-print(site_data)
-
+# password2 = "150000$TJeCQvvV$15c04a338635b4d11f559b9d8d55f92bb91e17f82ec34283809b25b082ecb550"
+# myquery = { "domain" : "tut.by" }  
+# site = site_data.find(myquery)
+# print(site)
+# test = []
+# for x in site:
+#         test.append(x)
+#         print(x)
+ttt = "dfsdf"
+test = "dgfsgf" + ttt
+print(test)
 
 
 # validate_username(username)
