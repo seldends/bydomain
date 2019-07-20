@@ -3,9 +3,10 @@
         <table class="table table-striped table-condensed" style="border-collapse:collapse;" >
             <thead>
                 <tr>
-                    <th class="sort_url">Сайт</th>
-                    <th class="sort_description">Описание</th>
-                    <th class="sort_domain">Домен NS-серверов</th>
+                    <th class="sort_domain">Сайт</th>
+                    <th class="sort_title">Заголовок</th>
+                    <th class="sort_registrar">Регистратор</th>
+                    <th class="sort_domain_type">Тип домена</th>
                     <th class="sort_domain_registration_date">Домен зарегистрирован</th>
                     <th class="sort_domain_valid_date">Домен действителен</th>
                     {% if current_user.is_authenticated %}
@@ -18,9 +19,10 @@
                 {% for site in site_list %}
                 
                 <tr data-toggle="collapse" data-target="#id{{site._id}}" class="accordion-toggle">
-                    <td class="sort_url">{{ site.domain }}</td>
-                    <td class="sort_description">{{ site.domain_type }}</td>
-                    <td class="sort_domain">{{ site.registrar }}</td>
+                    <td class="sort_domain">{{ site.domain }}</td>
+                    <td class="sort_title">{{ site.title }}</td>
+                    <td class="sort_registrar">{{ site.registrar }}</td>
+                    <td class="sort_domain_type">{{ site.domain_type }}</td>
                     <td class="sort_domain_registration_date">{{ site.creation_date }}</td>
                     <td class="sort_domain_valid_date">{{ site.expiration_date }}</td>
                     {% if current_user.is_authenticated %}
@@ -30,10 +32,13 @@
                 <tr>
                     <td colspan="6" class="hiddenRow">
                         <div id="id{{site._id}}" class="accordian-body collapse">
-                            <p>              
-                                Заголовок: {{ site.domain }}<br>
-                                Название: {{ site.domain_type }}<br>
-                                Домен NS-серверов: {{ site.registrar }}<br>
+                            <p>    
+                                Домен: {{ site.domain }}<br>          
+                                Заголовок: {{ site.title }}<br>
+                                Описание: {{ site.description }}<br>
+                                URL: <a href="{{ site.url }}">{{ site.url }}</a><br>
+                                Тип домена: {{ site.domain_type }}<br>
+                                Регистратор: {{ site.registrar }}<br>
                                 Домен зарегистрирован: {{ site.creation_date }}  действителен до: {{ site.expiration_date }}<br>     
                             </p>
                         </div>
@@ -43,15 +48,4 @@
             </tbody>     
         </table>
     
-    </div>
-    <div class="container"> 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-danger" role="alert">
-                {{ message }}
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
     </div>

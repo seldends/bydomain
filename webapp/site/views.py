@@ -4,7 +4,7 @@ from flask import Blueprint, redirect, url_for, render_template, flash
 from webapp.user.forms import LoginForm, RegistrationForm
 from webapp.site.forms import SearchForm
 from webapp.extensions import mongo
-from webapp.site.util import get_data
+from webapp.site.util import get_data, get_url, get_data_all
 
 blueprint = Blueprint('site', __name__, url_prefix='/site')
 
@@ -16,6 +16,8 @@ def sort_test():
     login_form = LoginForm()
     signup_form = RegistrationForm()
     site_list = site_collection.find({})
+    #get_url()
+    #get_data_all()
 
     return render_template('result.html', login_form=login_form, signup_form=signup_form, site_list=site_list, search_form=search_form)
 
@@ -27,17 +29,17 @@ def search():
     search_form = SearchForm()
     site_list = []
     if search_form.validate_on_submit():
-        result = site_collection.find({ "domain" : search_form.request.data })
+        url_str = search_form.request.data
+        result = site_collection.find({ "domain" : url_str })
         for x in result:
             site_list.append(x)
-        #print(site_list)
-        #if result is None:
-        #print(result)
         if not site_list:
-            url_str = search_form.request.data
             get_data(url_str)
             flash('Информация о сайте добавлена')
-            return redirect(url_for('main.index')) 
+            result = site_collection.find({ "domain" : url_str })
+            for x in result:
+                site_list.append(x)
+            return render_template('result.html', login_form=login_form, signup_form=signup_form, site_list=site_list, search_form=search_form) 
         flash('Сайт найден')
         return render_template('result.html', login_form=login_form, signup_form=signup_form, site_list=site_list, search_form=search_form)
     else:     

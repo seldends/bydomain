@@ -1,13 +1,34 @@
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
+import requests
+from bs4 import BeautifulSoup
+import requests, json
+
 
 mongo = PyMongo()
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["brdomain"]
 users = db["users"]
-site_data = db["site_data"]
+site_list_url = db["site_url"]
+
+
+result = site_list_url.find({})
+for x in result:
+        
+        print(x)
+print(result)
+page_list = [i for i in range(1,2)] 
+for page in page_list:
+        print(str(page))
+# def get_data_all()
+#     site_list_url = mongo.db.site_url
+#     result = site_list_url.find({ "domain" : url_str })
+#         for x in result:
+#             site_list.append(x)
+
+
 
 def check_password(password1, password2):
     print(check_password_hash(password1, password2)) 
@@ -38,11 +59,44 @@ def validate_username(username):
 # for x in site:
 #         test.append(x)
 #         print(x)
-ttt = "dfsdf"
-test = "dgfsgf" + ttt
-print(test)
 
 
+# def get_html(url):
+#     headers = {
+#         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:65.0) Gecko/20100101 Firefox/65.0'
+#     }
+#     try:
+#         result = requests.get(url, headers=headers)
+#         result.raise_for_status()
+#         return result.text
+#     except(requests.RequestException, ValueError):
+#         print("Сетевая ошибка")
+#         return False
+
+
+
+# ttt = "dfsdf"
+# test = "dgfsgf" + ttt
+# print(test)
+
+
+# r = requests.get('http://tut.by') # first we try http
+# print(r.url) # check the actual URL for the site
+
+# name = "tut.by"
+# url_str = "http://"+ name
+# r = requests.get(url_str) # first we try http
+# html = get_html(r.url)
+# #print(html)
+# if html:
+#         soup = BeautifulSoup(html, 'html.parser')
+#         title = soup.find('title').text
+#         description = soup.find('head').find('meta', {"name":"description"})['content']
+#         #description = soup.find('head').find('meta', {"name":"description"})
+#         print(title)
+#         print(description)
+#         print(r.url)
+        #return {"title": title, "description": description}
 # validate_username(username)
 # user = col_site.find(myquery)
 # user2 = mongo.db.users.find(myquery)

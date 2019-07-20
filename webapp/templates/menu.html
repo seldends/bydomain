@@ -1,17 +1,14 @@
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <!-- Название -->
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Название</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">BRDomain</a>
     <!-- Строка поиска -->
     <form class="form-inline" method="POST" action="{{ url_for('site.search') }}">
         {{ signup_form.hidden_tag() }}
         <div>
           {{ search_form.request() }}
           {{ search_form.submit }}
-        </div>
-        
-        
+        </div>     
     </form>
-  
   
     <!-- Links -->
     <ul class="navbar-nav px-3">
@@ -26,7 +23,7 @@
         </li>       
       {% else %} 
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('user.login') }}"  data-toggle="modal" data-target="#exampleModal">Войти</a>
+          <a class="nav-link" href="{{ url_for('user.login') }}"  data-toggle="modal" data-target="#LoginModal">Войти</a>
         </li>    
       {% endif %}
     </ul>
