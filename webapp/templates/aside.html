@@ -22,8 +22,8 @@
     
     <p>Done</p>
     <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="sort_domain" checked>
-        <label class="custom-control-label" for="sort_domain">Домен</label>
+        <input type="checkbox" class="custom-control-input" id="sort_registrar" checked>
+        <label class="custom-control-label" for="sort_registrar">Регистратор</label>
     </div>
     <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id="sort_domain_type" checked>
@@ -55,7 +55,7 @@
 <!-- Скрипт для переключения колонок в таблице -->
 <script>
     $(function(){
-    $('#sort_description,#sort_yandex_sqi,#sort_domain,#sort_domain_registration_date,#sort_domain_valid_date,#sort_published_date,#sort_update_date,#sort_title,#sort_domain_type').click(function(){
+    $('#sort_description,#sort_yandex_sqi,#sort_domain,#sort_domain_registration_date,#sort_domain_valid_date,#sort_published_date,#sort_update_date,#sort_title,#sort_domain_type,#sort_registrar').click(function(){
         var idname = this.id;          
     if(this.checked == false) {
         $('.' + idname).addClass('d-none');

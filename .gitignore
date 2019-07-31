@@ -5,3 +5,4 @@ migrations/
 config.py
 shell.py
 settings.py
+test.py

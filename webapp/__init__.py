@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask
 from webapp.extensions import mongo, login_manager
 
 from webapp.main import blueprint as main_blueprint
@@ -6,8 +6,9 @@ from webapp.user.views import blueprint as user_blueprint
 from webapp.site.views import blueprint as site_blueprint
 from webapp.user.models import User
 
+
 def create_app(config_object='webapp.settings'):
-    
+
     app = Flask(__name__)
     app.config.from_object(config_object)
     mongo.init_app(app)
@@ -28,5 +29,3 @@ def create_app(config_object='webapp.settings'):
         return User(username=u["username"], hash_password=u['password'])
 
     return app
-
-

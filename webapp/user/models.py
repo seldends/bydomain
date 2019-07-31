@@ -1,6 +1,3 @@
-from werkzeug.security import generate_password_hash, check_password_hash
-#from webapp.database import users
-
 class User:
     def __init__(self, username, hash_password):
         self.username = username
@@ -20,7 +17,6 @@ class User:
 
     def get_id(self):
         return self.username
-    
+
     def get_hash_password(self):
         return self.hash_password
-
